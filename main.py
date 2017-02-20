@@ -104,13 +104,6 @@ class Bomb(webapp2.RequestHandler):
     self.response.headers['Content-Type'] = 'application/json'
     self.response.out.write(json.dumps(urls))
 
-class Dump(webapp2.RequestHandler):
-  """Returns a JSON of fresh pictures to manually curate from Tumblr"""
-  def get(self):
-    list_of_pictures = get_all_pics()
-    self.response.headers['Content-Type'] = 'application/json'
-    self.response.write(json.dumps(list_of_pictures))
-
 class Initialize(webapp2.RequestHandler):
   def get(self):
     from lib.bcrypt import bcrypt
@@ -126,7 +119,6 @@ class Initialize(webapp2.RequestHandler):
 router = [('/',MainPage),
           ('/random',Random),
           ('/bomb',Bomb),
-          ('/dump',Dump),
           ('/init',Initialize)]
 
 app = webapp2.WSGIApplication(router)
